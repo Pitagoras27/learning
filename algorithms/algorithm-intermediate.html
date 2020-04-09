@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function myReplace(str, before, after) {
+            const searchBefore = str.indexOf(before)
+            if(str[searchBefore] === str[searchBefore].toUpperCase() ) {
+                after = after.charAt(0).toUpperCase() + after.slice(1)
+            }
+            return str.replace(before, after)
+        }
+
+        const result = myReplace("He is Sleeping on the couch", "Sleeping", "sitting")
+        
+        // console.log(result)
+
+    </script>
+
+    <script>
+    // DE un arreglo proporcionado como primer parámetro, devolver el nodo completo si tiene alguna coincidencia con una
+    // de las propiedades pasadas en el objeto del segundo parámetro. Si no se pasa un objeto q en su totalidad sea identico al 
+    // que se encuentra dentro del array del primer parámetro devolver un array vacío
+    function whatIsInAName(collection, source) {
+        var srcKeys = Object.keys(source);
+
+        return collection.filter(function(obj) {
+            for (var i = 0; i < srcKeys.length; i++) {
+            if (obj[srcKeys[i]] !== source[srcKeys[i]]) {
+                console.log(obj, "............")
+                console.log(source[srcKeys[i]], "-----------------")
+                return false;
+            }
+            }
+            return true;
+        });
+    }
+
+        const result = whatIsInAName(
+        [
+            {"a": 1, "b": 2, "c": 3}
+        ], 
+        {"a": 1, "b": 9999, "c": 3}
+        )
+
+        console.log(result)
+
+        // test here
+        /* const result = whatIsInAName(
+        [
+            { "apple": 1 }, 
+            { "apple": 1 }, 
+            { "apple": 1, "bat": 2 }
+        ], 
+        { "apple": 1 }
+        ); */
+
+        /* const result = whatIsInAName(
+        [
+            { "apple": 1, "bat": 2 },
+            { "bat": 2 }, 
+            { "apple": 1, "bat": 2, "cookie": 2 }
+        ], 
+        { "apple": 1, "bat": 2 }
+        )*/ 
+
+        /* const result = whatIsInAName(
+        [
+            { "apple": 1, "bat": 2 }, 
+            { "apple": 1 }, 
+            { "apple": 1, "bat": 2, "cookie": 2 }
+        ], 
+        { "apple": 1, "cookie": 2 }
+        ) */
+
+        /* const result = whatIsInAName(
+        [
+            { "apple": 1, "bat": 2 }, 
+            { "apple": 1 }, 
+            { "apple": 1, "bat": 2, "cookie": 2 }, 
+            { "bat":2 }
+        ], 
+            { "apple": 1, "bat": 2 }
+        ) */
+    </script>
+
+    <script>
+        // DNA Pairing
+        /*
+            Asignar a cada una de la letras pasadas en el primer parametro su tipo de cadena correspondiente según la nomenclatura del ADN
+            Una vez teniendo identificado que letra corresponde a cada tipo devolver esta correspondencia en un array. Así contando cada letra
+            con su correspondiente devolver el conjunto en un array de arreglos
+        */
+
+        function pairElement(str) {
+            const newArr = []
+            const setPair = (char) => {
+                switch(char) {
+                    case 'A':
+                    newArr.push(['A', 'T'])
+                    break
+                    case 'T':
+                    newArr.push(['T', 'A'])
+                    break
+                    case 'G':
+                    newArr.push(['G','C'])
+                    break
+                    default:
+                    newArr.push(['C','G'])
+                }
+            }
+            
+            for(var i = 0; i < str.length; i++) {
+               setPair(str[i]) 
+            }
+            // return newArr
+            const objectDNA = {
+                A: 'T',
+                T: 'A',
+                G: 'C',
+                C: 'G'
+            }
+
+            const resultWithMap = str.split("").map((item) => [item, objectDNA[item]])
+            return resultWithMap
+        }
+
+        // pairElement("ATCGA") should return [["A","T"],["T","A"],["C","G"],["G","C"],["A","T"]]
+        // pairElement("TTGAG") should return [["T","A"],["T","A"],["G","C"],["A","T"],["G","C"]]
+        // pairElement("CTCTA") should return [["C","G"],["T","A"],["C","G"],["T","A"],["A","T"]]
+
+        // Este problema puede ser resulto de forma procesal y imperativa, utilizando un ciclo for y seteando un array global
+        // También puede ser resuelto mediante el paradigma declarativo, inicializando un objeto con la data seteada por default y
+        // mediante un map ir devolviendo un arreglo por cada iteración, que tenga el valor q se itera y la data buscada en el 
+        // objeto seteado por default
+    </script>
+
+    <script>
+        // Missing letters
+        // Encuentra la letra faltante del rango proporcionado y devuelvela
+
+        function fearNotLetter(str) {
+            for(var i = 0; i < str.length; i++) {
+                let code = str.charCodeAt(i)
+                console.log(str.charCodeAt(0) + i, "aaa")
+                if (code !== str.charCodeAt(0) + i) {
+                    return String.fromCharCode(code - 1);
+                }
+            }
+            return undefined;
+        }
+
+        // fearNotLetter("abce") should return "d".
+        // fearNotLetter("abcdefghjklmno") should return "i".
+        // fearNotLetter("stvwx") should return "u".
+        // fearNotLetter("bcdf") should return "e".
+        // fearNotLetter("abcdefghijklmnopqrstuvwxyz") should return undefined.
+    </script>
+
+    <script>
+        // Sorted Union
+
+        /*
+            DE un conjunto de parámetros pasados como lista de argumentos a la función, devolver en un nuevo array, los elementos unicos
+            se debe respetar la posición de cada elemento afectado en el total de array 
+        */
+        function uniteUnique(...arr1){
+            const result = []
+            for(var i = 0; i < arr1.length; i++){
+                for(var j = 0; j < arr1[i].length; j++){
+                    if(!result.includes(arr1[i][j])){
+                        result.push(arr1[i][j])
+                    }
+                }
+            }
+
+            const withReduce = arr1.reduce((result, current) => (
+                result.
+                    concat(current.
+                        filter((item) => result.indexOf(item) === -1
+                    )
+                )
+            ))
+
+            const imperativeRes = []
+            const withArguments = Array.prototype.slice.call(arguments)
+            for(let i = 0; i < withArguments.length; i++){
+                let nestedArray = withArguments[i]
+                for(let j = 0; j < nestedArray.length; j++){
+                    if(imperativeRes.indexOf(nestedArray[j]) < 0) {
+                        imperativeRes.push(nestedArray[j])
+                    }
+                }
+            }
+
+            return withReduce
+        }
+
+        // uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]) should return [1, 3, 2, 5, 4].
+        // uniteUnique([1, 2, 3], [5, 2, 1]) should return [1, 2, 3, 5].
+        // uniteUnique([1, 2, 3], [5, 2, 1, 4], [2, 1], [6, 7, 8]) should return [1, 2, 3, 5, 4, 6, 7, 8].
+
+        // Este problema se puede resolver aduciendo a una gestión imperativa, anidando el for del array individual 
+        // dentro del array contenedo. al acceder a cada uno de los valores de cada uno de los arreglos se puede
+        // validar verificando si el arreglo contenedor () incluye el elemento actual, si no lo contiene se agrega con push
+        // Para implementar la forma declarativa hay que recorrer el array de array con reduce, retornar el valor concatenado q devuelva un filter
+    </script>
+
+    <script>
+        // Convert HTML Entities
+
+        function convertHTML(str) {
+            let temp = str.split("")
+            for(let i = 0; i < str.length; i++) {
+                switch(str[i]){
+                case '&':
+                    temp[i] = '&amp;'
+                    break
+                case '<':
+                    temp[i] = '&lt;'
+                    break
+                case '>':
+                    temp[i] = '&gt;'
+                    break
+                case '"':
+                    temp[i] = '&quot;'
+                    break
+                case '\'':
+                    temp[i] = '&apos;'
+                    break
+                }
+            }
+            // return temp.join("");
+            const entities = {
+                '&' : '&amp;',
+                '<' : '&lt;',
+                '>' : '&gt;',
+                '"' : '&quot;',
+                '\'': '&apos;'
+            }
+            // str.split("").map(item => entities[item] || item).join("")
+            return str.replace(/([&<>'"])/g, match => entities[match])
+        }
+
+        // convertHTML("Dolce & Gabbana") should return Dolce &amp; Gabbana.
+        // convertHTML("Hamburgers < Pizza < Tacos") should return Hamburgers &lt; Pizza &lt; Tacos.
+        // convertHTML("Sixty > twelve") should return Sixty &gt; twelve.
+        // convertHTML('Stuff in "quotation marks"') should return Stuff in &quot;quotation marks&quot;.
+        // convertHTML("Schindler's List") should return Schindler&apos;s List.
+        // convertHTML("<>") should return &lt;&gt;.
+        // convertHTML("abc") should return abc
+    </script>
+
+    <script>
+        // Sum All Odd Fibonacci Numbers
+
+        // Dado un numero positivo entero, sumar todos los números impares de la secuencia de fibbonaci que sean menores o iguales al q ha sido pasado por parámetro
+
+    </script>
+</body>
+</html>

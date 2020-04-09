@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Knowledge bank</title>
+    </head>
+    <body>
+        <script>
+            // ejercicio JS básico "Record Collection" https://www.freecodecamp.org/
+
+            /*
+            Modificar los valores y las propiedades del objeto según su id relacionado
+            si el valor es una cadena vacía eliminar el nodo relacionado completo
+            si la prop es un array pasar el valor al indice final
+            si la prop no existe crearla junto con el tipo de dato que contenga, strings o arrays
+            eliminar el nodo relacionado si el valor pasado es una cadena vacía.
+        */
+
+            function updateRecords(id, prop, value) {
+                switch (prop) {
+                    case 'artist':
+                        if (value !== '') {
+                            collection[id][prop] = value
+                        }
+                        break
+                    case 'tracks': // array
+                        if (
+                            Array.isArray(collection[id][prop]) &&
+                            value !== ''
+                        ) {
+                            collection[id][prop].push(value)
+                        } else {
+                            collection[id][prop] = [value]
+                        }
+                        break
+                    case 'album':
+                        collection[id][prop] = value
+                        break
+                }
+
+                return collection
+            }
+
+            // console.log(updateRecords(5439, "artist", "ABBA"));
+            // console.log(updateRecords(5439, "tracks", "Take a Chance on Me"));
+            // console.log(updateRecords(2548, "artist", ""));
+            // console.log(updateRecords(2468, "tracks", "Free"));
+            // console.log(updateRecords(2548, "tracks", ""));
+            // console.log(updateRecords(1245, "album", "Riptide"))
+        </script>
+
+        <script>
+            // ejercicio JS básico "Profile Lookup" https://www.freecodecamp.org/
+
+            /*
+            De un objeto contacts comprobar si el parámetro name se corresponde con la propiedad firstName, si
+            es así devolver el valor de la propiedad indicada en el segundo parámetro
+            En caso de no existir el nombre del contacto devolver el mensaje "No such contact"
+            En caso de no existir el nombre de propiedad asignada en el segundo parámetro devolver "No such property"
+        */
+
+            function lookUpProfile(name, prop) {
+                for (var i = 0; i < contacts.length; i++) {
+                    if (contacts[i].firstName === name) {
+                        if (contacts[i].hasOwnProperty(prop)) {
+                            return contacts[i][prop]
+                        } else {
+                            return 'No such contact'
+                        }
+                    }
+                }
+                return 'No such property'
+            }
+
+            // console.log(lookUpProfile("Kristian", "lastName"));
+            // console.log(lookUpProfile("Sherlock", "likes"));
+            // console.log(lookUpProfile("Harry","likes"));
+            // console.log(lookUpProfile("Bob", "number"));
+            // console.log(lookUpProfile("Bob", "potato"));
+            // console.log(lookUpProfile("Akira", "address"));
+        </script>
+        <script>
+            // ejercicio JS basic algorithm scripting "Confirm the Ending" https://www.freecodecamp.org/
+            /*
+           Validar con un valor booleano si un string (primer parámetro) finaliza con el string pasado como segundo parámetro
+        */
+            function confirmEnding(str, target) {
+                const targetLength = -target.length
+                return str === `${str.slice(0, targetLength)}${target}`
+            }
+
+            // console.log(confirmEnding("Bastian", "n"));
+            // console.log(confirmEnding("Congratulation", "on")
+            // console.log(confirmEnding("Connor", "n")
+            // console.log(confirmEnding("Walking on water and developing software from a specification are easy if both are frozen", "specification")
+            // console.log(confirmEnding("He has to give me a new name", "name")
+            // console.log(confirmEnding("Open sesame", "same")
+            // console.log(confirmEnding("Open sesame", "pen")
+            // console.log(confirmEnding("Open sesame", "game")
+            // console.log(confirmEnding("If you want to save our world, you must hurry. We dont know how much longer we can withstand the nothing", "mountain")
+            // console.log(confirmEnding("Abstraction", "action")
+
+            // Se puede solucionar con el metodo slice.
+            // Se puede solucionar con una expresión regular
+        </script>
+
+        <script>
+            // ejercicio JS basic algorithm scripting "Repeat a String Repeat a String" https://www.freecodecamp.org/
+            /*
+            Repetir un string (primer parámetro de la función) la cantidad de veces indicada en el segundo parametro y devolverlo
+            Si el segundo parámetro es un 0 o un numero negativo devolver una cadena vacía
+        */
+
+            function repeatStringNumTimes(str, num) {
+                if (num <= 0) return ''
+                const arrLength = new Array(num).fill(str).join('')
+                return arrLength
+            }
+
+            // console.log(repeatStringNumTimes("abc", 3))
+            // console.log(repeatStringNumTimes("*", 3))
+            // console.log(repeatStringNumTimes("abc", 4))
+            // console.log(repeatStringNumTimes("abc", 1))
+            // console.log(repeatStringNumTimes("*", 8))
+            // console.log(repeatStringNumTimes("abc", -2))
+
+            // Se puede solucionar utilizando un ciclo while
+            // Se puede utilizar la recursión
+            // Se puede solucionar la función incorporada repeat
+        </script>
+
+        <script>
+            // ejercicio JS basic algorithm scripting "Truncate a StringPassed" https://www.freecodecamp.org/
+
+            function truncateString(str, num) {
+                if (num >= str.length) return str
+                return str.slice(0, num) + '...'
+            }
+
+            // console.log(truncateString("A-tisket a-tasket A green and yellow basket", "A-tisket a-tasket A green and yellow basket".length));
+            // console.log(truncateString("A-tisket a-tasket A green and yellow basket", 8))
+            // console.log(truncateString("Peter Piper picked a peck of pickled peppers", 11))
+            // console.log(truncateString("A-", 1))
+            // console.log(truncateString("A-tisket a-tasket A green and yellow basket", "A-tisket a-tasket A green and yellow basket".length + 2))
+            // console.log(truncateString("Absolutely Longer", 2))
+
+            // Mejor utilizar el slice como resultado de un ternario. Sólo espero un 2 tipos de resultado diferente
+        </script>
+
+        <script>
+            // ejercicio JS basic algorithm scripting "Finders Keepers"
+            // Devolver el primero elemento del arreglo cuyo valor divisible entre 2 siempre tenga un residuo de 0. En caso contrario devolver undefined
+
+            function findElement(arr, func) {
+                let num = arr[0]
+                // return func(num) ? num : undefined ;
+                return arr.find(func)
+            }
+
+            // console.log(findElement([1, 2, 3, 4], num => num % 2 === 0));
+            // console.log(findElement([1, 3, 5, 8, 9, 10], function(num) { return num % 2 === 0; }))
+
+            // Se puede solucionar empleando el paradigma de programación imperativa utilizando un for
+            // Se puede solucionar empreando el paradigma de programación funcional utilizando un find
+
+            function findElement(arr, func) {
+                return arr[arr.map(func).indexOf(true)]
+            }
+
+            // FORMA BASTANTE COMPLEJA. Utilizando el indice del arreglo pasando la funcion como parametro de un map
+            // para que devuelva elementos boleanos con un indexOf obtiene el primero que es true
+        </script>
+
+        <script>
+            //  ejercicio JS basic algorithm scripting "Boo who"
+            // Comprobación de valores de tipos de datos primitivos
+
+            function booWho(bool) {
+                return typeof bool === 'boolean'
+            }
+
+            console.log(booWho(null))
+        </script>
+
+        <script>
+            // ejercicio JS basic algorithm scripting  "Title Case a Sentence"
+            // Devuelve la cadena provista con la primera letra de cada palabra en mayúscula.
+            // Cada una de las palabras deberá estar en minúsculas.
+
+            function titleCase(str) {
+                const lowerArray = str.toLowerCase().split(' ')
+                const capitalice = lowerArray.map(item =>
+                    item.replace(item.charAt(0), item.charAt(0).toUpperCase())
+                )
+                return capitalice.join(' ')
+            }
+
+            // console.log(titleCase("I'm a little tea pot"));
+            // console.log(titleCase("sHoRt AnD sToUt"))
+            // console.log(titleCase("HERE IS MY HANDLE HERE IS MY SPOUT"))
+        </script>
+
+        <script>
+            //  ejercicio JS basic algorithm scripting Slice and Splice
+            // The second array should remain the same after the function runs.
+        </script>
+        <script>
+            // Mutations
+            // Función que comprueba si todas las letras del string contenido en el primer indice del arreglo pasado por parametro,
+            // se encuentran en el string conformado por el segundo indice
+            function mutation(arr) {
+                const arr1 = arr[0].toLowerCase()
+                const arr2 = arr[1].toLowerCase()
+                for (var i = 0; i < arr2.length; i++) {
+                    if (arr1.indexOf(arr2[i]) < 0) return false
+                }
+                return true
+            }
+
+            // console.log(mutation(["hello", "hey"]))
+            // console.log(mutation(["hello", "Hello"]))
+            // console.log(mutation(["zyxwvutsrqponmlkjihgfedcba", "qrstu"]))
+            // console.log(mutation(["Mary", "Army"])      )
+            // console.log(mutation(["Mary", "Aarmy"]))
+            // console.log(mutation(["Alien", "line"]))
+            // console.log(mutation(["floor", "for"]))
+            // console.log(mutation(["hello", "neo"]))
+            // console.log(mutation(["voodoo", "no"]))
+            // console.log(mutation(["ate", "date"]))
+            // console.log(mutation(["Tiger", "Zebra"]))
+            // console.log(mutation(["Noel", "Ole"])))
+        </script>
+
+        <script>
+            // Where do I Belong
+            /*
+            Retorna el indice del elemento anterior al valor proporcionado en el segundo parámetro 
+        */
+
+            function getIndexToIns(arr, num) {
+                arr.sort((a, b) => a - b)
+                // arr.push(num), orden.indexOf(num);
+                // arr.filter(item => num > item).length
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i] >= num) return i
+                }
+                return arr.length
+            }
+
+            // getIndexToIns([10, 20, 30, 40, 50], 35) should return 3.
+            // getIndexToIns([10, 20, 30, 40, 50], 30) should return 2.
+            // getIndexToIns([40, 60], 50) should return 1.
+            // getIndexToIns([3, 10, 5], 3) should return 0.
+            // getIndexToIns([5, 3, 20, 3], 5) should return 2.
+            // getIndexToIns([2, 20, 10], 19) should return 2.
+            // getIndexToIns([2, 5, 10], 15) should return 3.
+            // getIndexToIns([], 1) should return 0.
+
+            // LÓGICA DETRÁS DE LA FUNCIÓN DE COMPARACIÓN DE SORT https://www.todojs.com/usar-correctamente-el-metodo-sort/
+            /* El método .sort() tiene un único parámetro opcional que permite ayudar a este método para realizar la ordenación del contenido. 
+        Esta es la clave para que este método se comporte como nos interesa en cada caso.
+
+        Esta función recibe dos valores a comparar y como resultado debe:
+
+        devolver un valor positivo (1) si e primer valor es superior al segundo
+        devolver un valor negativo (-1) si e primer valor es inferior al segundo
+        devolver un valor cero (0) si los dos valores son iguales o equivalentes para la ordenación. */
+        </script>
+
+        <script>
+            // Funcionamiento del stack en JS
+        </script>
+    </body>
+</html>
