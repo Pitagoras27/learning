@@ -25,3 +25,6 @@ yarn-error.log*
 #Editor
 vsWorkspace.code-workspace
 
+#others proyects
+node-project
+firebase-project
