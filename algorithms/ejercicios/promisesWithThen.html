@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Promises without async await</title>
+    </head>
+    <body>
+        <script>
+            const apiKey = 'b89fc45c2067cbd33560270639722eae'
+
+            function getPopularMovies() {
+                const url = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${apiKey}`
+                return fetch(url)
+                    .then(response => response.json())
+                    .then(data => data.results)
+            }
+
+            function getTopMoviesIds(n = 3) {
+                return getPopularMovies().then(popularMovies =>
+                    popularMovies.slice(0, n).map(movie => movie.id)
+                )
+            }
+        </script>
+    </body>
+</html>
