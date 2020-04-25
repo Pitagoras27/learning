@@ -31,16 +31,22 @@ printTrades(PERSON)
 
 const USER = {
   name: 'Ramses',
-  apellido: 'Magno',
-  edad: 20
+  lastName: 'Magno',
+  age: 20
 }
 
-function isAdult({ name, edad }) {
-  if (edad > 18) {
+const IS_MAYOR = 18
+
+const isAdult = (age) => age > IS_MAYOR
+
+function printMessage(user) {
+  const { name } = user
+  const { age } = user
+  if (isAdult(age)) {
     console.log(`${name} es mayor de edad`)
   } else {
     console.log(`${name} no es mayor de edad`)
   }
 }
 
-isAdult(USER)
+printMessage(USER)
