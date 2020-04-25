@@ -26,7 +26,6 @@ function printTrades(peope) {
   }
 }
 
-console.log(`Carlos is: `)
 printTrades(PERSON)
 
 const USER = {
@@ -37,15 +36,14 @@ const USER = {
 
 const IS_MAYOR = 18
 
-const isAdult = (age) => age > IS_MAYOR
+const isAdult = ({ age }) => age > IS_MAYOR
 
-function printMessage(user) {
+const printMessage = (user) => {
   const { name } = user
-  const { age } = user
-  if (isAdult(age)) {
+  if (isAdult(user)) {
     console.log(`${name} es mayor de edad`)
   } else {
-    console.log(`${name} no es mayor de edad`)
+    console.log(`Acceso denegado`)
   }
 }
 
