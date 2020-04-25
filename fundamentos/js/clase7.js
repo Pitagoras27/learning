@@ -7,12 +7,6 @@ const PERSON = {
   guitarrist: true
 }
 
-const USER = {
-  name: 'Ramses',
-  apellido: 'Magno',
-  edad: 20
-}
-
 // trades oficios
 function printTrades(peope) {
   if (peope.ingenier) {
@@ -34,3 +28,19 @@ function printTrades(peope) {
 
 console.log(`Carlos is: `)
 printTrades(PERSON)
+
+const USER = {
+  name: 'Ramses',
+  apellido: 'Magno',
+  edad: 20
+}
+
+function isAdult({ name, edad }) {
+  if (edad > 18) {
+    console.log(`${name} es mayor de edad`)
+  } else {
+    console.log(`${name} no es mayor de edad`)
+  }
+}
+
+isAdult(USER)
