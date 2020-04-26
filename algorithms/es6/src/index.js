@@ -165,7 +165,7 @@ function* helloWorld() {
     yield 'Hello, '
   }
   if (true) {
-    yield 'World'
+    yield 'World !'
   }
 }
 
