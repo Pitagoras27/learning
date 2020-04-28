@@ -18,7 +18,7 @@ Person.prototype.altura = function () {
   } else if (this.tall < 1.80 && this.tall > 1.65) {
     console.log(`Tienes buena altua, no eres muy alto ni muy bajito porque mide ${this.tall}`)
   } else {
-    console.log(`Eres bajito porque mides ${this.tall}`)
+    console.log(`Soy bajita porque mido ${this.tall}`)
   }
 }
 
@@ -28,6 +28,13 @@ const talla = carlos.altura()
 saluda
 talla
 
-const magaly = new Person('Magaly')
-const saluda = magaly.gretting()
-const talla = magaly.altura()
+const magaly = new Person('Magaly', 'Gutiérrez', 1.60)
+const magSaluda = magaly.gretting()
+const magTalla = magaly.altura()
+
+magSaluda
+magTalla
+
+// FALTA VER COMO SOLUCIONAR EL PROBLEMA DEL THIS EN LAS ARROW FUNCTION
+
+
