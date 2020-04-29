@@ -12,25 +12,39 @@ const swResponse = person => {
   console.log(`The character of star wars is ${person.name}.`)
 }
 
+const failErr = () => console.log(`No se pudo obtener el id del personaje ${id}`)
+
 const getCharacter = (id, callback) => {
   const character = `${API_URL}${CHARACTER_URL.replace(':id', id)}`
   const opts = { crossDomain: true }
-  $.get(character, opts, function (res) {
-    swResponse(res)
-    if (callback) {
-      callback()
-    }
-  })
+  $.get(character, opts, callback).fail(() => failErr)
 }
 
 // llamadas en secuenciales
 // antipatron callback hell
-getCharacter(1, function () {
-  getCharacter(2, function () {
-    getCharacter(3, function () {
-      getCharacter(5, function () {
-        getCharacter(8)
+getCharacter(1, res => {
+  swResponse(res)
+  getCharacter(2, res => {
+    swResponse(res)
+    getCharacter(3, res => {
+      swResponse(res)
+      getCharacter(5, res => {
+        swResponse(res)
+        getCharacter(8, res => {
+          swResponse(res)
+          getCharacter(13, res => {
+            swResponse(res)
+            getCharacter(21, res => {
+              swResponse(res)
+              getCharacter(34, res => {
+                swResponse(res)
+              })
+            })
+          })
+        })
       })
     })
   })
 })
+
+// Gestión de errores con callbacks con fail de jquery
