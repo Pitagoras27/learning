@@ -90,6 +90,10 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
             .hide {
                 display: none;
             }
+
+            * {
+                font-family: 'Helvetica';
+            }
         </style>
     </head>
     <body>
@@ -114,6 +118,7 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
                 Empezar a jugar!
             </button>
         </div>
+
         <script type="text/javascript">
             const startGame = () => new Game()
 
@@ -122,7 +127,7 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
             const naranja = document.getElementById('naranja')
             const verde = document.getElementById('verde')
             const BTN_START = document.getElementById('btnEmpezar')
-            const LAST_LEVEL = 10
+            const LAST_LEVEL = 2
 
             class Game {
                 constructor() {
@@ -134,13 +139,21 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
                 initialize() {
                     this.clickHandler = this.clickHandler.bind(this)
                     this.nextLevel = this.nextLevel.bind(this)
-                    BTN_START.classList.add('hide')
+                    this.toogleStart()
                     this.level = 1
                     this.interactiveBtns = {
                         celeste,
                         violeta,
                         naranja,
                         verde
+                    }
+                }
+
+                toogleStart() {
+                    if (BTN_START.classList.contains('hide')) {
+                        BTN_START.classList.remove('hide')
+                    } else {
+                        BTN_START.classList.add('hide')
                     }
                 }
 
@@ -247,19 +260,45 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
 
                         if (this.subnivel === this.level) {
                             this.level += 1
-                            console.log(this)
                             this.removeEventHandler()
 
                             // Final of game
-                            if (this.nivel === LAST_LEVEL + 1) {
+                            if (this.level === LAST_LEVEL + 1) {
+                                this.winnerGame('success')
                             } else {
                                 // next level
                                 setTimeout(this.nextLevel, 1500)
                             }
                         }
                     } else {
-                        // Lose
+                        this.loseGame()
                     }
+                }
+
+                stateOfGame(userStatus) {
+                    return new Promise((resolve, reject) => {
+                        if (userStatus === 'success') {
+                            resolve('Felicidades has ganado el juego!')
+                        } else {
+                            reject(
+                                'Has perdido, has click para volver a empezar!'
+                            )
+                        }
+                    })
+                }
+                winnerGame(status) {
+                    this.stateOfGame(status).then(res => {
+                        this.initialize()
+                        alert(res)
+                    })
+                }
+
+                loseGame(lose) {
+                    this.stateOfGame(lose).catch(res => {
+                        alert(res)
+                        this.removeEventHandler()
+                        this.initialize()
+                    })
                 }
             }
         </script>
