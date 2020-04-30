@@ -131,7 +131,7 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
                 }
 
                 initialize() {
-                    // this.clickHandler = this.clickHandler.bind(this)
+                    this.clickHandler = this.clickHandler.bind(this)
                     BTN_START.classList.add('hide')
                     this.level = 10
                     this.interactiveBtns = {
@@ -183,14 +183,22 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
                 }
 
                 getInputUser() {
-                    this.interactiveBtns.celeste.onclick = e =>
-                        this.clickHandler(e)
-                    this.interactiveBtns.violeta.onclick = e =>
-                        this.clickHandler(e)
-                    this.interactiveBtns.naranja.onclick = e =>
-                        this.clickHandler(e)
-                    this.interactiveBtns.verde.onclick = e =>
-                        this.clickHandler(e)
+                    this.interactiveBtns.celeste.addEventListener(
+                        'click',
+                        this.clickHandler
+                    )
+                    this.interactiveBtns.violeta.addEventListener(
+                        'click',
+                        this.clickHandler
+                    )
+                    this.interactiveBtns.naranja.addEventListener(
+                        'click',
+                        this.clickHandler
+                    )
+                    this.interactiveBtns.verde.addEventListener(
+                        'click',
+                        this.clickHandler
+                    )
                 }
 
                 clickHandler(ev) {
