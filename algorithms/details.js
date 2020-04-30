@@ -52,6 +52,15 @@ moneyBox(5) // 5
 moneyBox(2) // 6
 */
 
+// Other clousere example
+// const greeting = phase => name => console.log(`Hola ${name} cómo estás ${phase}`)
+
+// const greetingArgentino = greeting('che')
+// const greetingMexican = greeting('wee')
+
+// greetingArgentino('Sasha')
+// greetingMexican('Carlos')
+
 const moneyBox = () => {
     var saveCoins = 0;
     const countCoins = coins => {
