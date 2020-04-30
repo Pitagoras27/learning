@@ -122,16 +122,18 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
             const naranja = document.getElementById('naranja')
             const verde = document.getElementById('verde')
             const BTN_START = document.getElementById('btnEmpezar')
+            const LAST_LEVEL = 10
 
             class Game {
                 constructor() {
                     this.initialize()
                     this.randomNumber()
-                    this.nextLevel()
+                    setTimeout(() => this.nextLevel(), 500)
                 }
 
                 initialize() {
                     this.clickHandler = this.clickHandler.bind(this)
+                    this.nextLevel = this.nextLevel.bind(this)
                     BTN_START.classList.add('hide')
                     this.level = 1
                     this.interactiveBtns = {
@@ -143,12 +145,13 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
                 }
 
                 randomNumber() {
-                    this.secuence = new Array(10)
+                    this.secuence = new Array(LAST_LEVEL)
                         .fill(0)
                         .map(number => Math.floor(Math.random() * 4))
                 }
 
                 nextLevel() {
+                    this.subnivel = 0
                     this.activeSecuence()
                     this.getInputUser()
                 }
@@ -214,10 +217,49 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
                     )
                 }
 
+                removeEventHandler() {
+                    this.interactiveBtns.celeste.removeEventListener(
+                        'click',
+                        this.clickHandler
+                    )
+                    this.interactiveBtns.violeta.removeEventListener(
+                        'click',
+                        this.clickHandler
+                    )
+                    this.interactiveBtns.naranja.removeEventListener(
+                        'click',
+                        this.clickHandler
+                    )
+                    this.interactiveBtns.verde.removeEventListener(
+                        'click',
+                        this.clickHandler
+                    )
+                }
+
                 clickHandler(ev) {
                     const colorName = ev.target.dataset.color
                     const numberColor = this.colorOfNumber(colorName)
                     this.iluminateColor(colorName)
+                    // start interaction game
+                    // if user choose well in fist level
+                    if (numberColor === this.secuence[this.subnivel]) {
+                        this.subnivel += 1
+
+                        if (this.subnivel === this.level) {
+                            this.level += 1
+                            console.log(this)
+                            this.removeEventHandler()
+
+                            // Final of game
+                            if (this.nivel === LAST_LEVEL + 1) {
+                            } else {
+                                // next level
+                                setTimeout(this.nextLevel, 1500)
+                            }
+                        }
+                    } else {
+                        // Lose
+                    }
                 }
             }
         </script>
