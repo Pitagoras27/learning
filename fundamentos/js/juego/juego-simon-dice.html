@@ -131,6 +131,7 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
                 }
 
                 initialize() {
+                    // this.clickHandler = this.clickHandler.bind(this)
                     BTN_START.classList.add('hide')
                     this.level = 10
                     this.interactiveBtns = {
@@ -149,12 +150,12 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
 
                 nextLevel() {
                     this.activeSecuence()
+                    this.getInputUser()
                 }
 
                 activeSecuence() {
                     for (let i = 0; i < this.level; i++) {
                         const COLOR = this.numberOfColor(this.secuence[i])
-                        console.log(COLOR, '<<<')
                         setTimeout(() => this.iluminateColor(COLOR), 1000 * i)
                     }
                 }
@@ -179,6 +180,21 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
 
                 turnOffColor(offColor) {
                     this.interactiveBtns[offColor].classList.remove('light')
+                }
+
+                getInputUser() {
+                    this.interactiveBtns.celeste.onclick = e =>
+                        this.clickHandler(e)
+                    this.interactiveBtns.violeta.onclick = e =>
+                        this.clickHandler(e)
+                    this.interactiveBtns.naranja.onclick = e =>
+                        this.clickHandler(e)
+                    this.interactiveBtns.verde.onclick = e =>
+                        this.clickHandler(e)
+                }
+
+                clickHandler(ev) {
+                    console.log(this, 'a<<<<')
                 }
             }
         </script>
