@@ -173,6 +173,19 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
                     }
                 }
 
+                colorOfNumber(color) {
+                    switch (color) {
+                        case 'celeste':
+                            return 0
+                        case 'violeta':
+                            return 1
+                        case 'naranja':
+                            return 2
+                        case 'verde':
+                            return 3
+                    }
+                }
+
                 iluminateColor(color) {
                     this.interactiveBtns[color].classList.add('light')
                     setTimeout(() => this.turnOffColor(color), 400)
@@ -202,7 +215,8 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
                 }
 
                 clickHandler(ev) {
-                    console.log(this, 'a<<<<')
+                    const colorName = ev.target.dataset.color
+                    const numberColor = this.colorOfNumber(colorName)
                 }
             }
         </script>
