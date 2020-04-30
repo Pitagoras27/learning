@@ -133,7 +133,7 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
                 initialize() {
                     this.clickHandler = this.clickHandler.bind(this)
                     BTN_START.classList.add('hide')
-                    this.level = 10
+                    this.level = 1
                     this.interactiveBtns = {
                         celeste,
                         violeta,
@@ -217,6 +217,7 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
                 clickHandler(ev) {
                     const colorName = ev.target.dataset.color
                     const numberColor = this.colorOfNumber(colorName)
+                    this.iluminateColor(colorName)
                 }
             }
         </script>
