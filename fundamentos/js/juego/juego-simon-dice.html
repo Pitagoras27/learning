@@ -116,20 +116,38 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
         </div>
         <script type="text/javascript">
             const empezarJuego = () => new Juego()
+
+            // const CELESTE = document.getElementById('celeste')
+            // const VIOLETA = document.getElementById('violeta')
+            // const NARANJA = document.getElementById('naranja')
+            // const VERDE = document.getElementById('verde')
+            const celeste = document.getElementById('celeste')
+            const violeta = document.getElementById('violeta')
+            const naranja = document.getElementById('naranja')
+            const verde = document.getElementById('verde')
+            const BTN_START = document.getElementById('btnEmpezar')
+
             class Juego {
                 constructor() {
                     this.initialize()
+                    console.log(this.randomNumber())
                 }
 
                 initialize() {
-                    const CELESTE = document.getElementById('celeste')
-                    const VIOLETA = document.getElementById('violeta')
-                    const NARANJA = document.getElementById('naranja')
-                    const VERDE = document.getElementById('verde')
-                    const BTN_START = document.getElementById('btnEmpezar')
-
                     BTN_START.classList.add('hide')
+                    this.nivel = 1
+                    this.interactiveBtns = {
+                        celeste,
+                        violeta,
+                        naranja,
+                        verde
+                    }
                 }
+
+                randomNumber = () =>
+                    new Array(10)
+                        .fill(0)
+                        .map(number => Math.floor(Math.random() * 4))
             }
         </script>
     </body>
