@@ -1,7 +1,11 @@
-// juego escribe la secuencia dictada por Simon dice // Simón dice sigue esta
-secuencia // Escribe lo que dijo simon // Va subiendo por nivel si se llega a
-equivocar vuelve a comenzar // SI el usuario supera los 10 niverles, tenina el
-juego exitosamente < !DOCTYPE html >
+<!--
+juego escribe la secuencia dictada por Simon dice
+Simón dice sigue esta secuencia
+Escribe lo que dijo simon
+Va subiendo por nivel si se llega a equivocar vuelve a comenzar 
+SI el usuario supera los 10 niverles, tenina el juego exitosamente
+-->
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -110,6 +114,23 @@ juego exitosamente < !DOCTYPE html >
                 Empezar a jugar!
             </button>
         </div>
-        <script type="text/javascript"></script>
+        <script type="text/javascript">
+            const empezarJuego = () => new Juego()
+            class Juego {
+                constructor() {
+                    this.initialize()
+                }
+
+                initialize() {
+                    const CELESTE = document.getElementById('celeste')
+                    const VIOLETA = document.getElementById('violeta')
+                    const NARANJA = document.getElementById('naranja')
+                    const VERDE = document.getElementById('verde')
+                    const BTN_START = document.getElementById('btnEmpezar')
+
+                    BTN_START.classList.add('hide')
+                }
+            }
+        </script>
     </body>
 </html>
