@@ -110,24 +110,20 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
                 data-color="naranja"
             ></div>
             <div id="verde" class="color verde right" data-color="verde"></div>
-            <button id="btnEmpezar" class="btn-start" onclick="empezarJuego()">
+            <button id="btnEmpezar" class="btn-start" onclick="startGame()">
                 Empezar a jugar!
             </button>
         </div>
         <script type="text/javascript">
-            const empezarJuego = () => new Juego()
+            const startGame = () => new Game()
 
-            // const CELESTE = document.getElementById('celeste')
-            // const VIOLETA = document.getElementById('violeta')
-            // const NARANJA = document.getElementById('naranja')
-            // const VERDE = document.getElementById('verde')
             const celeste = document.getElementById('celeste')
             const violeta = document.getElementById('violeta')
             const naranja = document.getElementById('naranja')
             const verde = document.getElementById('verde')
             const BTN_START = document.getElementById('btnEmpezar')
 
-            class Juego {
+            class Game {
                 constructor() {
                     this.initialize()
                     this.randomNumber()
@@ -136,7 +132,7 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
 
                 initialize() {
                     BTN_START.classList.add('hide')
-                    this.level = 1
+                    this.level = 10
                     this.interactiveBtns = {
                         celeste,
                         violeta,
@@ -145,21 +141,25 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
                     }
                 }
 
-                randomNumber = () =>
-                    (this.secuence = new Array(10)
+                randomNumber() {
+                    this.secuence = new Array(10)
                         .fill(0)
-                        .map(number => Math.floor(Math.random() * 4)))
+                        .map(number => Math.floor(Math.random() * 4))
+                }
 
-                nextLevel = () => {
+                nextLevel() {
+                    this.activeSecuence()
+                }
+
+                activeSecuence() {
                     for (let i = 0; i < this.level; i++) {
-                        const color = this.iluminateColor(
-                            this.randomNumber()[i]
-                        )
-                        console.log(color, 'what color is')
+                        const COLOR = this.numberOfColor(this.secuence[i])
+                        console.log(COLOR, '<<<')
+                        setTimeout(() => this.iluminateColor(COLOR), 1000 * i)
                     }
                 }
 
-                iluminateColor = numberColor => {
+                numberOfColor(numberColor) {
                     switch (numberColor) {
                         case 0:
                             return 'celeste'
@@ -170,6 +170,15 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
                         case 3:
                             return 'verde'
                     }
+                }
+
+                iluminateColor(color) {
+                    this.interactiveBtns[color].classList.add('light')
+                    setTimeout(() => this.turnOffColor(color), 400)
+                }
+
+                turnOffColor(offColor) {
+                    this.interactiveBtns[offColor].classList.remove('light')
                 }
             }
         </script>
