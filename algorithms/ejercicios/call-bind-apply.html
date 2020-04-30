@@ -46,12 +46,12 @@
             const valores = [800, 'noreste']
             caminar.apply(richard, valores)
 
-            /*
-        Call - comma
-        Apply - arreglo
-      */
+            // Call - comma
+            // Apply - arreglo
 
             // Establecer `this` en una nueva función usando `bind`
+            // Es importante recordar que bind no ejecuta la función devuelve
+            // una nueva función
             const daniel = { name: 'Daniel', apellido: 'Sánchez' }
             const danielSaluda = saludar.bind(daniel)
             danielSaluda()
@@ -70,5 +70,7 @@
                 button.onclick = () => alert('Nunca pares de aprender!')
             })
         </script>
+
+        <script></script>
     </body>
 </html>
