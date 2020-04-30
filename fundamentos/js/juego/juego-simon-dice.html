@@ -130,12 +130,13 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
             class Juego {
                 constructor() {
                     this.initialize()
-                    console.log(this.randomNumber())
+                    this.randomNumber()
+                    this.nextLevel()
                 }
 
                 initialize() {
                     BTN_START.classList.add('hide')
-                    this.nivel = 1
+                    this.level = 1
                     this.interactiveBtns = {
                         celeste,
                         violeta,
@@ -145,9 +146,31 @@ SI el usuario supera los 10 niverles, tenina el juego exitosamente
                 }
 
                 randomNumber = () =>
-                    new Array(10)
+                    (this.secuence = new Array(10)
                         .fill(0)
-                        .map(number => Math.floor(Math.random() * 4))
+                        .map(number => Math.floor(Math.random() * 4)))
+
+                nextLevel = () => {
+                    for (let i = 0; i < this.level; i++) {
+                        const color = this.iluminateColor(
+                            this.randomNumber()[i]
+                        )
+                        console.log(color, 'what color is')
+                    }
+                }
+
+                iluminateColor = numberColor => {
+                    switch (numberColor) {
+                        case 0:
+                            return 'celeste'
+                        case 1:
+                            return 'violeta'
+                        case 2:
+                            return 'naranja'
+                        case 3:
+                            return 'verde'
+                    }
+                }
             }
         </script>
     </body>
