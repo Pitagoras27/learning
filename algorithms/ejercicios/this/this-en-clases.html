@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>This en clases</title>
+        <style>
+            body {
+                background: #f6df1d;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: sans-serif;
+                font-size: 25px;
+                height: 100vh;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="render"></div>
+        <div class="renderType"></div>
+        <script>
+            class API {
+                BASE_URL = 'https://pokeapi.co/api/v2/pokemon/'
+                async fetchData(id) {
+                    const searchID = id || this.id
+                    const data = await fetch(`${this.BASE_URL}${searchID}`)
+                    const pokemon = await data.json()
+                    this.character = pokemon
+                    return pokemon
+                }
+            }
+            class Pokemon extends API {
+                constructor(id) {
+                    super()
+                    this.id = id
+                    this.targetElement = document.querySelector('.render')
+                    this.targetType = document.querySelector('.renderType')
+                }
+                elementFound() {
+                    this.targetElement.textContent = `Pokemon ${this.character.name} encontrado!`
+                }
+
+                elementType() {
+                    this.targetType.textContent = `Y es de tipo ${this.character.types[0].type.name}!`
+                }
+            }
+
+            // const api = new API()
+            // api.fetchData(25).then(res => console.log(res))
+            const pokemon = new Pokemon(25)
+            pokemon.fetchData().then(res => {
+                pokemon.elementFound()
+                pokemon.elementType()
+            })
+        </script>
+    </body>
+</html>
