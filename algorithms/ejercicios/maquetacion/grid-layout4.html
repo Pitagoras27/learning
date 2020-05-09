@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>grid layout basics</title>
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
+        <style>
+            /* https://www.youtube.com/watch?v=DbwuD9hQLok */
+            /*
+              Medidas de la cuadrícula
+                
+            */
+            .grid-container {
+                display: grid;
+                grid-template-columns: 40px 1fr 2fr;
+            }
+            .grid-item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: #ffffff 1px solid;
+                text-align: center;
+                padding: 1rem;
+                font-size: 2rem;
+            }
+        </style>
+    </head>
+    <body>
+        <section class="grid-container">
+            <div class="grid-item">A</div>
+            <div class="grid-item">B</div>
+            <div class="grid-item">C</div>
+            <div class="grid-item">D</div>
+            <div class="grid-item">E</div>
+            <div class="grid-item">F</div>
+            <div class="grid-item">G</div>
+            <div class="grid-item">H</div>
+            <div class="grid-item">I</div>
+        </section>
+    </body>
+</html>
