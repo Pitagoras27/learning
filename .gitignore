@@ -26,7 +26,11 @@ yarn-error.log*
 vsWorkspace.code-workspace
 
 #others proyects
-node-project
+node-project/
+autocomplete-redux/
+redux-curse/
+redux-implementation/
+fazt/
 firebase-project
 js-profesional/
 react-router/
