@@ -24,8 +24,10 @@ yarn-error.log*
 
 #Editor
 vsWorkspace.code-workspace
+fundamentos/fundamentos.code-workspace
 
 #others proyects
+fundamentos/
 node-project/
 autocomplete-redux/
 redux-curse/
@@ -34,6 +36,8 @@ fazt/
 firebase-project
 js-profesional/
 react-router/
+redux-edteam/
+fitnessapp/
 websokets/
 algorithms/algorithms.code-workspace
 bootstrap/    

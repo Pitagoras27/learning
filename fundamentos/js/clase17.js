@@ -27,3 +27,25 @@ getCharacter(5)
 // cuando la función que hace la solicitud al servidor es liberara del callstack
 // su callback relacionado es pasado de la cola de tareas a la pila de ejecición
 
+
+
+// const API_BASE_URL = "https://rickandmortyapi.com/api";
+// const PEOPLE = "character/:id";
+// const API_CALL = `${API_BASE_URL}/${PEOPLE.replace(":id", 1)}`;
+// console.log(API_CALL)
+
+// const getData = async () => {
+//   try {
+//     const response = await fetch(API_CALL);
+//     const data = await response.json();
+
+//     console.log(`Oi aló!, yo me llamo ${data.name}`);
+//   } catch (error) {
+//     console.log("Fetch error: ", error);
+//   }
+// };
+
+// getData();
+
+
+// 

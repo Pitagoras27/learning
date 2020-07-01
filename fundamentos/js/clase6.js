@@ -18,7 +18,8 @@ var sameValue = {
 
 // son 2 objetos q apuntan a 2 lugares distintos en memoria
 carlos == sameValue // false
-carlos === sameValue // false
+const stricComparation = carlos === sameValue // false
+console.log(stricComparation)
 
 // mismo valor (efecto colateral)
 carlos = sameValue // true
