@@ -27,6 +27,7 @@ vsWorkspace.code-workspace
 fundamentos/fundamentos.code-workspace
 
 #others proyects
+badges-proyect/
 fundamentos/
 node-project/
 autocomplete-redux/
