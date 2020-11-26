@@ -38,8 +38,8 @@ const fruits = () => {
     console.log(fruits3)
 }
 
-// clousures 
-// recuerda el ámbito en elcual ha sido creado
+// clousures
+// recuerda el ámbito en el cual ha sido creado
 
 /*
 const moneyBox = (coins) => {
@@ -67,28 +67,26 @@ myMoneyBox(4); // 4
 myMoneyBox(6); // 10
 myMoneyBox(10); //20
 
-const llevaLaCuenta = (numero) => {
+const llevaLaCuenta = () => {
     const cuenta = 0;
     const aumentarcuenta = (numero) => {
         cuenta += numero
-        returnconsole.log(cuenta);
+        return console.log(cuenta);
     }
     return aumentarcuenta
 }
 
 let llevameLaCuenta = llevaLaCuenta()
 
-llevameLaCuenta(3)
-llevameLaCuenta(4)
-llevameLaCuenta(5)
-
-// IMPRIME   3712
+llevameLaCuenta(3) // 3
+llevameLaCuenta(4) // 7
+llevameLaCuenta(5) // 12
 
 const buildSum = (n) => {
-    returnsum(n + n);
-    function sum(a, b) {
+    function sum(a, b = 0) {
         return a + b
     }
+    return sum(n + n);
 }
 
 buildSum(2) // 4
