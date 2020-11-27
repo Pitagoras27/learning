@@ -21,10 +21,11 @@ console.log(idProduct);
 
 // Filter
 // Para obtener los productos a los que aplican un descuento
-const conditionalFunction = item => item.price > 1000;
-const expensive = products.filter(conditionalFunction);
-console.log(expensive);
+  const conditionalFunction = item => item.price > 1000;
+  const expensive = products.filter(conditionalFunction);
+  console.log(expensive);
 
-// Para filtrar los más barátos
-const cheap = product => !conditionalFunction(product);
-console.log(cheap);
+  // Para filtrar los más barátos
+  const cheap = product => !conditionalFunction(product);
+  const others = products.filter(cheap);
+  console.log(others);
