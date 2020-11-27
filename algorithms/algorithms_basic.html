@@ -31,8 +31,32 @@
             const booWho = (bool) => typeof bool === 'boolean';
             console.log(booWho(null));
 
-            /*Retorna la primera letra de la palabra capitalizada. Y asegura q el resto está en minúscula. Esto es igual para cada una de las palabras*/
+            /*
+            Copia cada elemento del primer array en el segundo, en orden, según lo establezca el índice indicado en el tercer parámetro. Retorna un arreglo como resultado. El array resultante no debe modificar los valores por referencia del arreglo original
+            */
 
+            const frankenSplice = (arr1, arr2, n) => {
+                const arrCopy = arr2.slice();
+                arrCopy.splice(n, 0, ...arr1);
+                return arrCopy;
+            }
+
+            console.log(frankenSplice([1, 2, 3], [4, 5, 6], 1));
+            // frankenSplice([1, 2], ["a", "b"], 1) should return ["a", 1, 2, "b"].
+            // frankenSplice(["claw", "tentacle"], ["head", "shoulders", "knees", "toes"], 2) should return ["head", "shoulders", "claw", "tentacle", "knees", "toes"];
+            // All elements from the first array should be added to the second array // in their original order.
+            // The first array should remain the same after the function runs.
+            // The second array should remain the same after the function runs.
+
+            /*
+            Elimina cada valor de tipo falsy del conjunto de elementos pasados por parámetro
+            */
+            const bouncer= arr => arr.filter(Boolean);
+            console.log(bouncer([7, "ate", "", false, 9]));
+
+            // bouncer(["a", "b", "c"]) should return ["a", "b", "c"].
+            // bouncer([false, null, 0, NaN, undefined, ""]) should return [].
+            // bouncer([null, NaN, 1, 2, undefined]) should return [1, 2].
 
             // ejercicio JS básico "Record Collection" https://www.freecodecamp.org/
 
@@ -202,12 +226,12 @@
             // Devuelve la cadena provista con la primera letra de cada palabra en mayúscula.
             // Cada una de las palabras deberá estar en minúsculas.
 
-            function titleCase(str) {
-                const lowerArray = str.toLowerCase().split(' ')
-                const capitalice = lowerArray.map(item =>
-                    item.replace(item.charAt(0), item.charAt(0).toUpperCase())
-                )
-                return capitalice.join(' ')
+            const titleCase = str => {
+                let strToLowerCase = str.toLowerCase().split(" ");
+                const result = strToLowerCase.map(element =>
+                    element.replace(element.charAt(0), element.charAt(0).toUpperCase())
+                );
+                return result.join(" ")
             }
 
             // console.log(titleCase("I'm a little tea pot"));
@@ -223,14 +247,13 @@
             // Mutations
             // Función que comprueba si todas las letras del string contenido en el primer indice del arreglo pasado por parametro,
             // se encuentran en el string conformado por el segundo indice
-            function mutation(arr) {
-                const arr1 = arr[0].toLowerCase()
-                const arr2 = arr[1].toLowerCase()
-                for (var i = 0; i < arr2.length; i++) {
-                    if (arr1.indexOf(arr2[i]) < 0) return false
-                }
-                return true
-            }
+            const mutation = arr => {
+            const toLower = arr[1].toLowerCase().split("");
+            return toLower.every(element =>
+                arr[0].toLowerCase().indexOf(element) !== -1
+            )}
+
+            console.log(mutation(["hello", "heslo"]));
 
             // console.log(mutation(["hello", "hey"]))
             // console.log(mutation(["hello", "Hello"]))
@@ -249,18 +272,17 @@
         <script>
             // Where do I Belong
             /*
-            Retorna el indice del elemento anterior al valor proporcionado en el segundo parámetro 
-        */
+            Inserta el valor pasado como segundo parámetro dentro del array
+            pasado como primer parámetro y una vez ordenado de forma ascendente, devuelve el índice del valor pasado insertado en el array.
+            */
 
-            function getIndexToIns(arr, num) {
-                arr.sort((a, b) => a - b)
-                // arr.push(num), orden.indexOf(num);
-                // arr.filter(item => num > item).length
-                for (var i = 0; i < arr.length; i++) {
-                    if (arr[i] >= num) return i
-                }
-                return arr.length
+            const getIndexToIns = (arr, num) => {
+                const arrCopy = [...arr, num];
+                arrCopy.sort((a, b) => a - b);
+                return arrCopy.indexOf(num);
             }
+
+            console.log(getIndexToIns([40, 60], 50));
 
             // getIndexToIns([10, 20, 30, 40, 50], 35) should return 3.
             // getIndexToIns([10, 20, 30, 40, 50], 30) should return 2.
