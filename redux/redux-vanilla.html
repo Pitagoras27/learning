@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recreando redux con vanillaJS</title>
+</head>
+<body>
+  <script>
+    const createStore = (reducer, initialState) => {
+      let state = initialState;
+      let updater = () => {}
+      const getState = () => state;
+
+      const dispatch = action => {
+        state = reducer(state, action);
+        updater();
+      }
+
+      const suscribe = listener => {
+        updater = listener;
+      }
+
+      return {
+        getState,
+        dispatch,
+        suscribe
+      }
+    }
+    const reducer = (state, action) => action;
+    const store = createStore(reducer, 'Estado inicial de la aplicación');
+    store.suscribe(() => {
+      console.log('From suscribe, the current state is: ', store.getState())
+    });
+    store.dispatch('update state from dispatch!');
+  </script>
+</body>
+</html>
