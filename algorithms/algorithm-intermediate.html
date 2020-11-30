@@ -35,7 +35,56 @@
 
         destroyer([1, 2, 3, 1, 2, 3], 2, 3);
 
+        /*Debuelve el objeto completo del arreglo pasado como primer argumento si, coincide con el objeto pasado como segundo parámetro*/
 
+        const whatIsInAName = (collection, source) => {
+            let srcSource = Object.keys(source);
+            return collection.filter(obj => {
+                return srcSource.every(key => {
+                    return obj.hasOwnProperty(key) && obj[key] === source[key]
+                })
+            });
+        }
+
+            whatIsInAName([
+            { first: "Romeo", last: "Montague" },
+            { first: "Mercutio", last: null },
+            { first: "Tybalt", last: "Capulet" }
+            ],
+            { last: "Capulet" }
+            );
+
+        // Convertir a spinal-case. Un spinal case es una funcionalidad que permite convertir un string en minusculas separadas por guines bajos. Deberá funcionar con letras masyúsculas y guines bajos.
+
+        const spinalCase = str => str.split(/\s|_|(?=[A-Z])/).join('-').toLowerCase();
+
+        console.log(spinalCase('This Is Spinal Tap'));
+
+        /* spinalCase("This Is Spinal Tap")
+        spinalCase("thisIsSpinalTap")
+        spinalCase("TheAndyGriffith_Show")
+        spinalCase("Teletubbies say Eh-oh")
+        spinalCase("AllThe-small Things") */
+
+        /*
+        Escribe una función que reciba un string por parámetro y si ésta comienza con consonante recorta ese conjunto de letras hasta antes de encontrar la primera vocal; colocala al final de la palabra y además agrega la silaba 'ay'.
+        Si no se encuentra con ninguna vocal solo agrega la sílaba ay.
+        Por el contrario si comienza con vocal, sólo agrega la sílaba way al final de la palabra.
+        */
+
+        const translatePigLatin = str => {
+            if(str.match(/^[aeiou]/)) return `${str}way`;
+            const isConsonant = str.match(/^[^aeiou]+/)[0];
+            return `${str.substring(isConsonant.length)}${isConsonant}ay`
+        }
+
+        // translatePigLatin("california") should return "aliforniacay".
+        // translatePigLatin("paragraphs") should return "aragraphspay".
+        // translatePigLatin("glove") should return "oveglay".
+        // translatePigLatin("algorithm") should return "algorithmway".
+        // translatePigLatin("eight") should return "eightway".
+        // translatePigLatin("schwartz") should return "artzschway".
+        // translatePigLatin("rhythm") should return "rhythmay".
 
 
         function myReplace(str, before, after) {
