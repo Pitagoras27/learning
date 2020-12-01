@@ -62,6 +62,9 @@ console.log(alternateIndexedId);
 // Convertir un array anidado en un array plano. Funciona para todo niveles de produndidad más extendidos.
 
 const nestedArray = [3, [5,8], 7, [8]];
+// alternative whitout reduce ->
+// [].concat(...nestedArray)
+// nestedArray.flat();
 
 const concatArray = (accum, item) => accum.concat(item);
 const arrayFlat = nestedArray.reduce(concatArray,[]);
