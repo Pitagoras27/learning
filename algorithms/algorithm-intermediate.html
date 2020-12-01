@@ -86,6 +86,28 @@
         // translatePigLatin("schwartz") should return "artzschway".
         // translatePigLatin("rhythm") should return "rhythmay".
 
+        /********************/
+        const myReplace = (str, before, after) => {
+            const index = str.indexOf(before);
+            if(str[index] === str[index].toUpperCase()) {
+                after = `${after.charAt(0).toUpperCase()}${after.slice(1)}`;
+            } else {
+                after = `${after.charAt(0).toLowerCase()}${after.slice(1)}`;
+            }
+            const result = str.replace(before, after)
+            return result;
+        }
+
+        myReplace("He is Sleeping on the couch", "Sleeping", "sitting");
+/*         myReplace("Let us go to the store", "store", "mall")
+        myReplace("He is Sleeping on the couch", "Sleeping", "sitting")
+        myReplace("I think we should look up there", "up", "Down")
+        myReplace("This has a spellngi error", "spellngi", "spelling")
+        myReplace("His name is Tom", "Tom", "john")
+        myReplace("Let us get back to more Coding", "Coding", "algorithms") */
+
+
+
 
         function myReplace(str, before, after) {
             const searchBefore = str.indexOf(before)
@@ -283,6 +305,31 @@
         // uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]) should return [1, 3, 2, 5, 4].
         // uniteUnique([1, 2, 3], [5, 2, 1]) should return [1, 2, 3, 5].
         // uniteUnique([1, 2, 3], [5, 2, 1, 4], [2, 1], [6, 7, 8]) should return [1, 2, 3, 5, 4, 6, 7, 8].
+
+        function uniteUniqueDeclarative(arr) {
+            /*
+                let newArr = [];
+                let i = 0;
+                while(arguments[i]) {
+                newArr = newArr.concat(arguments[i]);
+                ++i
+                };
+            */
+            // let allInArray = Array.prototype.slice.call(arguments);
+            const allInArray = Array.from(arguments);
+            const flatWithReduce = allInArray.reduce((acc, curr) => (acc.concat(curr)), []);
+            const result = flatWithReduce.filter((item, pos) => {
+                return flatWithReduce.indexOf(item) === pos;
+            });
+            return result;
+        }
+
+        const withArrow = (...arrays) => ([...new Set(arrays.flat())]);
+        const onlySet = (...arrays) => [...new Set([].concat(...arrays))];
+
+        console.log(onlySet([1, 3, 2], [5, 2, 1, 4], [2, 1]))
+        console.log(withArrow([1, 3, 2], [5, 2, 1, 4], [2, 1]));
+        console.log(uniteUniqueDeclarative([1, 3, 2], [5, 2, 1, 4], [2, 1]));
 
         // Este problema se puede resolver aduciendo a una gestión imperativa, anidando el for del array individual 
         // dentro del array contenedo. al acceder a cada uno de los valores de cada uno de los arreglos se puede
