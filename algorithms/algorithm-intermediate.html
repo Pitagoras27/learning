@@ -338,6 +338,30 @@
     </script>
 
     <script>
+        /* Del número pasado por parámetro obtener la suma de todos los valores impares de la secuencia de fibonacci que sean menores o igual al número pasado por parámetro*/
+        const sumFibs = (num) => {
+            if(num <= 0) return 0;
+            let initFibo = [1,1];
+            let addFibo = 0;
+
+            while((addFibo = initFibo[0] + initFibo[1]) <= num) {
+                initFibo.unshift(addFibo);
+            }
+            return initFibo
+                .filter(x => x % 2 !== 0)
+                .reduce((x,y) => x+y);
+        }
+
+        console.log(sumFibs(4));
+        // sumFibs(1) should return a number.
+        // sumFibs(1000) should return 1785.
+        // sumFibs(4000000) should return 4613732.
+        // sumFibs(4) should return 5.
+        // sumFibs(75024) should return 60696.
+        // sumFibs(75025) should return 135721.
+    </script>
+
+    <script>
         // Convert HTML Entities
 
         function convertHTML(str) {
