@@ -37,6 +37,17 @@ class arrayStructure {
   shift() {
     return this.delete(0);
   }
+
+  unshift(item) {
+    for (let i = this.length; i > 0; i--) {
+      this.data[i] = this.data[i - 1];
+    }
+
+    this.data[0] = item;
+    this.length += 1;
+
+    return this.data;
+  }
 }
 
 const arrayStructureInstance = new arrayStructure();
@@ -52,3 +63,6 @@ console.log("Delete index two", arrayStructureInstance);
 
 arrayStructureInstance.shift("E");
 console.log("Delete initial index", arrayStructureInstance);
+
+arrayStructureInstance.unshift("AA");
+console.log("Add item to index 0", arrayStructureInstance);
