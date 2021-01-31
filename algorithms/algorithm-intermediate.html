@@ -7,6 +7,108 @@
 </head>
 <body>
     <script>
+        // Dada una función que recibe 2 arreglos por parametro, devolver el item que no se encuentre en cualquiera de ambos
+
+        const diffArray = (arr1, arr2) => {
+            const union = arr1.concat(arr2)
+            const result = union.filter(item => !arr1.includes(item) || !arr2.includes(item));
+            return result;
+        }
+
+        console.log(diffArray([1,2,3,4,5], [1,2,3,5,6]));
+
+        //Other version
+        const diffArrayV = (arr1, arr2) => {
+            const diff = (a, b) => a.filter(item => b.indexOf(item) === -1);
+            return [...diff(arr1, arr2), ...diff(arr2, arr1)];
+        }
+
+        console.log(diffArrayV(['a','b','c','d','f'],['a','b','c','d','e','g']));
+
+        // Busca y elimina los elementos del arreglo (pasado como primer parámetro) identificados como los parámetros posteriores.
+
+        // Se utiliza la declaración de función en el estándar ES5 ya que no se tiene acceso a arguments desde un arrow function.
+        function destroyer(arr) {
+            const getArgs = Array.from(arguments).slice(1);
+            return arr.filter(item => !getArgs.includes(item));
+        }
+
+        destroyer([1, 2, 3, 1, 2, 3], 2, 3);
+
+        /*Debuelve el objeto completo del arreglo pasado como primer argumento si, coincide con el objeto pasado como segundo parámetro*/
+
+        const whatIsInAName = (collection, source) => {
+            let srcSource = Object.keys(source);
+            return collection.filter(obj => {
+                return srcSource.every(key => {
+                    return obj.hasOwnProperty(key) && obj[key] === source[key]
+                })
+            });
+        }
+
+            whatIsInAName([
+            { first: "Romeo", last: "Montague" },
+            { first: "Mercutio", last: null },
+            { first: "Tybalt", last: "Capulet" }
+            ],
+            { last: "Capulet" }
+            );
+
+        // Convertir a spinal-case. Un spinal case es una funcionalidad que permite convertir un string en minusculas separadas por guines bajos. Deberá funcionar con letras masyúsculas y guines bajos.
+
+        const spinalCase = str => str.split(/\s|_|(?=[A-Z])/).join('-').toLowerCase();
+
+        console.log(spinalCase('This Is Spinal Tap'));
+
+        /* spinalCase("This Is Spinal Tap")
+        spinalCase("thisIsSpinalTap")
+        spinalCase("TheAndyGriffith_Show")
+        spinalCase("Teletubbies say Eh-oh")
+        spinalCase("AllThe-small Things") */
+
+        /*
+        Escribe una función que reciba un string por parámetro y si ésta comienza con consonante recorta ese conjunto de letras hasta antes de encontrar la primera vocal; colocala al final de la palabra y además agrega la silaba 'ay'.
+        Si no se encuentra con ninguna vocal solo agrega la sílaba ay.
+        Por el contrario si comienza con vocal, sólo agrega la sílaba way al final de la palabra.
+        */
+
+        const translatePigLatin = str => {
+            if(str.match(/^[aeiou]/)) return `${str}way`;
+            const isConsonant = str.match(/^[^aeiou]+/)[0];
+            return `${str.substring(isConsonant.length)}${isConsonant}ay`
+        }
+
+        // translatePigLatin("california") should return "aliforniacay".
+        // translatePigLatin("paragraphs") should return "aragraphspay".
+        // translatePigLatin("glove") should return "oveglay".
+        // translatePigLatin("algorithm") should return "algorithmway".
+        // translatePigLatin("eight") should return "eightway".
+        // translatePigLatin("schwartz") should return "artzschway".
+        // translatePigLatin("rhythm") should return "rhythmay".
+
+        /********************/
+        const myReplace = (str, before, after) => {
+            const index = str.indexOf(before);
+            if(str[index] === str[index].toUpperCase()) {
+                after = `${after.charAt(0).toUpperCase()}${after.slice(1)}`;
+            } else {
+                after = `${after.charAt(0).toLowerCase()}${after.slice(1)}`;
+            }
+            const result = str.replace(before, after)
+            return result;
+        }
+
+        myReplace("He is Sleeping on the couch", "Sleeping", "sitting");
+/*         myReplace("Let us go to the store", "store", "mall")
+        myReplace("He is Sleeping on the couch", "Sleeping", "sitting")
+        myReplace("I think we should look up there", "up", "Down")
+        myReplace("This has a spellngi error", "spellngi", "spelling")
+        myReplace("His name is Tom", "Tom", "john")
+        myReplace("Let us get back to more Coding", "Coding", "algorithms") */
+
+
+
+
         function myReplace(str, before, after) {
             const searchBefore = str.indexOf(before)
             if(str[searchBefore] === str[searchBefore].toUpperCase() ) {
@@ -165,8 +267,8 @@
         // Sorted Union
 
         /*
-            DE un conjunto de parámetros pasados como lista de argumentos a la función, devolver en un nuevo array, los elementos unicos
-            se debe respetar la posición de cada elemento afectado en el total de array 
+            DE un conjunto de parámetros pasados como lista de argumentos a la función, devolver en un nuevo array, los elementos únicos.
+            Se debe respetar la posición de cada elemento afectado en el total del array.
         */
         function uniteUnique(...arr1){
             const result = []
@@ -204,10 +306,59 @@
         // uniteUnique([1, 2, 3], [5, 2, 1]) should return [1, 2, 3, 5].
         // uniteUnique([1, 2, 3], [5, 2, 1, 4], [2, 1], [6, 7, 8]) should return [1, 2, 3, 5, 4, 6, 7, 8].
 
+        function uniteUniqueDeclarative(arr) {
+            /*
+                let newArr = [];
+                let i = 0;
+                while(arguments[i]) {
+                newArr = newArr.concat(arguments[i]);
+                ++i
+                };
+            */
+            // let allInArray = Array.prototype.slice.call(arguments);
+            const allInArray = Array.from(arguments);
+            const flatWithReduce = allInArray.reduce((acc, curr) => (acc.concat(curr)), []);
+            const result = flatWithReduce.filter((item, pos) => {
+                return flatWithReduce.indexOf(item) === pos;
+            });
+            return result;
+        }
+
+        const withArrow = (...arrays) => ([...new Set(arrays.flat())]);
+        const onlySet = (...arrays) => [...new Set([].concat(...arrays))];
+
+        console.log(onlySet([1, 3, 2], [5, 2, 1, 4], [2, 1]))
+        console.log(withArrow([1, 3, 2], [5, 2, 1, 4], [2, 1]));
+        console.log(uniteUniqueDeclarative([1, 3, 2], [5, 2, 1, 4], [2, 1]));
+
         // Este problema se puede resolver aduciendo a una gestión imperativa, anidando el for del array individual 
         // dentro del array contenedo. al acceder a cada uno de los valores de cada uno de los arreglos se puede
         // validar verificando si el arreglo contenedor () incluye el elemento actual, si no lo contiene se agrega con push
         // Para implementar la forma declarativa hay que recorrer el array de array con reduce, retornar el valor concatenado q devuelva un filter
+    </script>
+
+    <script>
+        /* Del número pasado por parámetro obtener la suma de todos los valores impares de la secuencia de fibonacci que sean menores o igual al número pasado por parámetro*/
+        const sumFibs = (num) => {
+            if(num <= 0) return 0;
+            let initFibo = [1,1];
+            let addFibo = 0;
+
+            while((addFibo = initFibo[0] + initFibo[1]) <= num) {
+                initFibo.unshift(addFibo);
+            }
+            return initFibo
+                .filter(x => x % 2 !== 0)
+                .reduce((x,y) => x+y);
+        }
+
+        console.log(sumFibs(4));
+        // sumFibs(1) should return a number.
+        // sumFibs(1000) should return 1785.
+        // sumFibs(4000000) should return 4613732.
+        // sumFibs(4) should return 5.
+        // sumFibs(75024) should return 60696.
+        // sumFibs(75025) should return 135721.
     </script>
 
     <script>

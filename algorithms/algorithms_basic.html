@@ -7,6 +7,57 @@
     </head>
     <body>
         <script>
+            // Ejercicio JS básico
+            /*
+            imprime en pantalla un string de forma inversa de forma declarativa.
+            */
+
+            const reverseString = str => str.split("").reverse().join("");
+            console.log(reverseString("hello")); // olleh
+
+            /* Encuentra en el array provisto el elemento que contenga la longitud más amplia*/
+            const findLongestWordLength = str => (
+                str.split(" ").reduce((acc, curr) => {
+                    return Math.max(acc, curr.length)
+                }, 0)
+            );
+
+            console.log(findLongestWordLength("The quick brown fox jumpedsa over the lazy dog"));
+
+            /*
+            comprueba si el valor pasado como parámetro puede clasificarse como booleano primitivo. Retorna true o false.
+            */
+
+            const booWho = (bool) => typeof bool === 'boolean';
+            console.log(booWho(null));
+
+            /*
+            Copia cada elemento del primer array en el segundo, en orden, según lo establezca el índice indicado en el tercer parámetro. Retorna un arreglo como resultado. El array resultante no debe modificar los valores por referencia del arreglo original
+            */
+
+            const frankenSplice = (arr1, arr2, n) => {
+                const arrCopy = arr2.slice();
+                arrCopy.splice(n, 0, ...arr1);
+                return arrCopy;
+            }
+
+            console.log(frankenSplice([1, 2, 3], [4, 5, 6], 1));
+            // frankenSplice([1, 2], ["a", "b"], 1) should return ["a", 1, 2, "b"].
+            // frankenSplice(["claw", "tentacle"], ["head", "shoulders", "knees", "toes"], 2) should return ["head", "shoulders", "claw", "tentacle", "knees", "toes"];
+            // All elements from the first array should be added to the second array // in their original order.
+            // The first array should remain the same after the function runs.
+            // The second array should remain the same after the function runs.
+
+            /*
+            Elimina cada valor de tipo falsy del conjunto de elementos pasados por parámetro
+            */
+            const bouncer= arr => arr.filter(Boolean);
+            console.log(bouncer([7, "ate", "", false, 9]));
+
+            // bouncer(["a", "b", "c"]) should return ["a", "b", "c"].
+            // bouncer([false, null, 0, NaN, undefined, ""]) should return [].
+            // bouncer([null, NaN, 1, 2, undefined]) should return [1, 2].
+
             // ejercicio JS básico "Record Collection" https://www.freecodecamp.org/
 
             /*
@@ -82,13 +133,13 @@
         </script>
         <script>
             // ejercicio JS basic algorithm scripting "Confirm the Ending" https://www.freecodecamp.org/
+
             /*
-           Validar con un valor booleano si un string (primer parámetro) finaliza con el string pasado como segundo parámetro
-        */
-            function confirmEnding(str, target) {
-                const targetLength = -target.length
-                return str === `${str.slice(0, targetLength)}${target}`
-            }
+            Validar con un valor booleano si un string (primer parámetro) finaliza con el string pasado como segundo parámetro
+            */
+            const confirmEnding = (str, target) => (
+                str.slice(str.length - target.length) === target
+            );
 
             // console.log(confirmEnding("Bastian", "n"));
             // console.log(confirmEnding("Congratulation", "on")
@@ -112,10 +163,13 @@
             Si el segundo parámetro es un 0 o un numero negativo devolver una cadena vacía
         */
 
-            function repeatStringNumTimes(str, num) {
-                if (num <= 0) return ''
-                const arrLength = new Array(num).fill(str).join('')
-                return arrLength
+            const repeatStringNumTimes = (str, num) => {
+                let accumulatedStr = '';
+                while(num > 0) {
+                    accumulatedStr += str;
+                    --num
+                }
+                return accumulatedStr;
             }
 
             // console.log(repeatStringNumTimes("abc", 3))
@@ -133,10 +187,9 @@
         <script>
             // ejercicio JS basic algorithm scripting "Truncate a StringPassed" https://www.freecodecamp.org/
 
-            function truncateString(str, num) {
-                if (num >= str.length) return str
-                return str.slice(0, num) + '...'
-            }
+            const truncateString = (str, num) => (
+                str.length > num ? `${str.slice(0, num)}...` : str
+            )
 
             // console.log(truncateString("A-tisket a-tasket A green and yellow basket", "A-tisket a-tasket A green and yellow basket".length));
             // console.log(truncateString("A-tisket a-tasket A green and yellow basket", 8))
@@ -152,11 +205,7 @@
             // ejercicio JS basic algorithm scripting "Finders Keepers"
             // Devolver el primero elemento del arreglo cuyo valor divisible entre 2 siempre tenga un residuo de 0. En caso contrario devolver undefined
 
-            function findElement(arr, func) {
-                let num = arr[0]
-                // return func(num) ? num : undefined ;
-                return arr.find(func)
-            }
+            const findElement = (arr, func) => arr.find(func)
 
             // console.log(findElement([1, 2, 3, 4], num => num % 2 === 0));
             // console.log(findElement([1, 3, 5, 8, 9, 10], function(num) { return num % 2 === 0; }))
@@ -173,27 +222,16 @@
         </script>
 
         <script>
-            //  ejercicio JS basic algorithm scripting "Boo who"
-            // Comprobación de valores de tipos de datos primitivos
-
-            function booWho(bool) {
-                return typeof bool === 'boolean'
-            }
-
-            console.log(booWho(null))
-        </script>
-
-        <script>
             // ejercicio JS basic algorithm scripting  "Title Case a Sentence"
             // Devuelve la cadena provista con la primera letra de cada palabra en mayúscula.
             // Cada una de las palabras deberá estar en minúsculas.
 
-            function titleCase(str) {
-                const lowerArray = str.toLowerCase().split(' ')
-                const capitalice = lowerArray.map(item =>
-                    item.replace(item.charAt(0), item.charAt(0).toUpperCase())
-                )
-                return capitalice.join(' ')
+            const titleCase = str => {
+                let strToLowerCase = str.toLowerCase().split(" ");
+                const result = strToLowerCase.map(element =>
+                    element.replace(element.charAt(0), element.charAt(0).toUpperCase())
+                );
+                return result.join(" ")
             }
 
             // console.log(titleCase("I'm a little tea pot"));
@@ -209,14 +247,13 @@
             // Mutations
             // Función que comprueba si todas las letras del string contenido en el primer indice del arreglo pasado por parametro,
             // se encuentran en el string conformado por el segundo indice
-            function mutation(arr) {
-                const arr1 = arr[0].toLowerCase()
-                const arr2 = arr[1].toLowerCase()
-                for (var i = 0; i < arr2.length; i++) {
-                    if (arr1.indexOf(arr2[i]) < 0) return false
-                }
-                return true
-            }
+            const mutation = arr => {
+            const toLower = arr[1].toLowerCase().split("");
+            return toLower.every(element =>
+                arr[0].toLowerCase().indexOf(element) !== -1
+            )}
+
+            console.log(mutation(["hello", "heslo"]));
 
             // console.log(mutation(["hello", "hey"]))
             // console.log(mutation(["hello", "Hello"]))
@@ -235,18 +272,17 @@
         <script>
             // Where do I Belong
             /*
-            Retorna el indice del elemento anterior al valor proporcionado en el segundo parámetro 
-        */
+            Inserta el valor pasado como segundo parámetro dentro del array
+            pasado como primer parámetro y una vez ordenado de forma ascendente, devuelve el índice del valor pasado insertado en el array.
+            */
 
-            function getIndexToIns(arr, num) {
-                arr.sort((a, b) => a - b)
-                // arr.push(num), orden.indexOf(num);
-                // arr.filter(item => num > item).length
-                for (var i = 0; i < arr.length; i++) {
-                    if (arr[i] >= num) return i
-                }
-                return arr.length
+            const getIndexToIns = (arr, num) => {
+                const arrCopy = [...arr, num];
+                arrCopy.sort((a, b) => a - b);
+                return arrCopy.indexOf(num);
             }
+
+            console.log(getIndexToIns([40, 60], 50));
 
             // getIndexToIns([10, 20, 30, 40, 50], 35) should return 3.
             // getIndexToIns([10, 20, 30, 40, 50], 30) should return 2.
