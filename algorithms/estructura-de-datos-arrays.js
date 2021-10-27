@@ -1,3 +1,5 @@
+// Estructura de datos arrays!
+
 class arrayStructure {
   constructor() {
     this.length = 0;
@@ -15,8 +17,8 @@ class arrayStructure {
   }
 
   pop() {
-    const itemDelete = this.data[this.lenght - 1];
-    delete this.data[this.lenght - 1];
+    const itemDelete = this.data[this.length - 1];
+    delete this.data[this.length - 1];
     return itemDelete;
   }
 
