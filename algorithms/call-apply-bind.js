@@ -1,5 +1,6 @@
 // Call, Apply y Bind
 // Estos métodos sirven para enlazar el contexto a una objeto de tipo función o a un objeto literal
+// La importancia radica en que puede establecer un objeto this distinto. Con apply, por ejemplo puedo escribir un metodo en un objeto y heredarlo a otro, sin necesidad de reescribir el método en el objeto que hereda
 
 // Construyendo un objeto con una función constructora
 
@@ -145,7 +146,7 @@ const literalObj = {
 literalObj.printLogLength(cb); // Print 4
 
 ////////////////////////////////////////////////////////////////////////////////
-// Super complicated to understand
+// complicated to understand
 var length = 4;
 function callback() {
   console.log(this.length);
@@ -160,3 +161,29 @@ const object = {
 };
 
 object.method(callback, 1, 2);
+
+// Funciones parciales
+// Anteriormente a spreed operator la manera de listar argumentos no implementados pero enviados desde la llamada se utilizaba arguments.
+// Para transformar la lista de argumentos en un array, podemos utilizar call en el prototipo Array del método slice. Lo que permitirá transformar
+// la lista de argumentos en un arreglo nativo. Ejemplo:
+
+function listArgs() {
+  const toArray = Array.prototype.slice.call(arguments)
+  console.log(toArray);
+}
+
+listArgs("Carlos", true, ["Developer", "Design"]);
+
+///////////////////////////////////////////
+
+function list() {
+  return Array.prototype.slice.call(arguments);
+}
+
+var list1 = list(1, 2, 3); // [1, 2, 3]
+
+// Crea una función la cual muestre un argumento oculto, sine necesidad de pasarlo explicitamente
+var leadingThirtysevenList = list.bind(undefined, 37);
+
+var list2 = leadingThirtysevenList(); // [37]
+var list3 = leadingThirtysevenList(1, 2, 3); // [37, 1, 2, 3]
